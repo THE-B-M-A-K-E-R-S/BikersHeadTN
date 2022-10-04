@@ -27,8 +27,9 @@ Route::get('/page2/{name?}/{age?}', function ($name = null, $age = null) {
 url('page2' , ['name' => 'foulen' , 'age'=> null ]);
 
 Route::get('/dashboard', function () {
-    return  view('dashboard');
-})->middleware('auth');
+    return  view('admin/dashboard');
+});
+//})->middleware('auth');
 
 
 
