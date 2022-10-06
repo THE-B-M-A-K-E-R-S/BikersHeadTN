@@ -29,7 +29,6 @@ url('page2' , ['name' => 'foulen' , 'age'=> null ]);
 Route::get('/dashboard', function () {
     return  view('admin/dashboard');
 });
-//})->middleware('auth');
 
 
 
