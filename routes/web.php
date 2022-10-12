@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaladeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/balades', function (BaladeController $baladeController) {
+    // return balade index controller
+    return $baladeController->index();
+});
 
 Route::get('/page1', function () {
     return '<h1>my first page</h1>';
