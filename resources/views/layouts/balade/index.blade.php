@@ -17,11 +17,12 @@
             <td>{{ $balade->id }}</td>
             <td>{{ $balade->name }}</td>
             <td>{{ $balade->description }}</td>
+
             <td>{{ date('d-m-Y', strtotime($balade->date)) }}</td>
             <td>
-                <a {{--href="{{ route('balade.show', $balade->id) }}"--}}>Show</a>
-                <a {{--href="{{ route('balade.edit', $balade->id) }}"--}}>Edit</a>
-                <form {{--action="{{ route('balade.destroy', $balade->id) }}"--}} method="POST">
+                <a {{--href="{{ route('balade.show', $balade->id) }}" --}}>Show</a>
+                <a {{--href="{{ route('balade.edit', $balade->id) }}" --}}>Edit</a>
+                <form {{--action="{{ route('balade.destroy', $balade->id) }}" --}} method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Delete</button>

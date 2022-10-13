@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Balade;
 use Illuminate\Http\Request;
+use App\Models\Bike;
 
-class BaladeController extends Controller
+class BikeController extends Controller
 {
-
-    /* s
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +14,8 @@ class BaladeController extends Controller
      */
     public function index()
     {
-        // get all balades
-        $balades = Balade::all();
-        // return view with balades
-        return view('layouts.balade.index')->with('balades', $balades);
+        $bikes = Bike::all();
+        return view('layouts.bike.index', compact('bikes'));
     }
 
     /**
@@ -29,7 +25,7 @@ class BaladeController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.bike.create');
     }
 
     /**
@@ -40,7 +36,22 @@ class BaladeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required',
+            'color' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'type' => 'required',
+            'size' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
+
+        Bike::create($request->all());
+
+        return redirect()->route('bike.index')
+            ->with('success', 'Bike created successfully.');
     }
 
     /**
@@ -51,7 +62,8 @@ class BaladeController extends Controller
      */
     public function show($id)
     {
-        //
+        $bike = Bike::find($id);
+        return view('layouts.bike.show', compact('bike'));
     }
 
     /**
@@ -62,7 +74,8 @@ class BaladeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bike = Bike::find($id);
+        return view('layouts.bike.edit', compact('bike'));
     }
 
     /**
@@ -74,7 +87,12 @@ class BaladeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bike = Bike::find($id);
+        $input = $request->all();
+
+        $bike->update($input);
+        return redirect()->route('bike.index')
+            ->with('success', 'Bike updated successfully');
     }
 
     /**
@@ -85,6 +103,9 @@ class BaladeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bike = Bike::find($id);
+        $bike->delete();
+        return redirect()->route('bike.index')
+            ->with('success', 'Bike deleted successfully');
     }
 }
