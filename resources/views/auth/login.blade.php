@@ -88,6 +88,19 @@
                     transparent 100%);
             height: 100vh;
             width: 100%;
+
+        }
+
+        .card {
+            margin-top: 150px;
+            height: 500px;
+            border-radius: 20px;
+            width: 400px;
+
+            opacity: 0.9;
+
+            text-align: center;
+            padding-top: 70px;
         }
 
         #radius-shape-1 {
@@ -115,7 +128,7 @@
         }
     </style>
 
-    <div class="container  px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="container  px-4 py-5 px-md-5 text-center text-lg-start my-5 ">
         <div class="row gx-lg-5 align-items-center mb-5">
             <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                 <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
@@ -147,6 +160,8 @@
 
                             <!-- Email input -->
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example4">Email adresse</label>
+
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -155,13 +170,14 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <label class="form-label" for="form3Example4">Email adresse</label>
 
 
                             </div>
 
                             <!-- Password input -->
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="form3Example4">Password</label>
+
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="new-password">
@@ -171,7 +187,6 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                <label class="form-label" for="form3Example4">Password</label>
                             </div>
 
 
