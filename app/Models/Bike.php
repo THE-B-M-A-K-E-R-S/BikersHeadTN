@@ -21,7 +21,7 @@ class Bike extends Model
     ];
 
 
-
+    
 
 
     // public function bikeType() {

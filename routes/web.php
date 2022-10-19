@@ -4,6 +4,7 @@ use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,16 @@ Route::get('/dashboard', function () {
 });
 
 
-Route::resource('/bike', BikeController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin/dashboard');
+    });
+    Route::resource('/bike', BikeController::class);
+
+});
