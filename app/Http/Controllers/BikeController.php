@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bike;
+use App\Models\Image;
+
+use Storage;
 
 class BikeController extends Controller
 {
@@ -48,8 +51,25 @@ class BikeController extends Controller
             'description' => 'required',
         ]);
 
-        Bike::create($request->all());
+        $bike = new Bike();
+        $bike->name = $request->name;
+        $bike->color = $request->color;
+        $bike->brand = $request->brand;
+        $bike->model = $request->model;
+        $bike->type = $request->type;
+        $bike->size = $request->size;
+        $bike->price = $request->price;
+        $bike->description = $request->description;
 
+        $bike->save();
+
+        foreach ($request->file('images') as $imagefile) {
+            $image = new Image;
+            $path = $imagefile->store('/images/resource', ['disk' =>   'my_files']);
+            $image->url = $path;
+            $image->bike_id = $bike->id;
+            $image->save();
+        }
         return redirect()->route('bike.index')
             ->with('success', 'Bike created successfully.');
     }

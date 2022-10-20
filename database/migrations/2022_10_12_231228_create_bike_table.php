@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bikes', function (Blueprint $table) {
             $table->id();
+
             $table->string('name');
             $table->string('color');
             $table->string('brand');
@@ -24,6 +25,10 @@ return new class extends Migration
             $table->string('price');
             $table->string('description');
             $table->timestamps();
+
+            // foreign key on images table
+            $table->unsignedBigInteger('images_id');
+            $table->foreign('images_id')->references('id')->on('images');
         });
     }
 

@@ -13,8 +13,8 @@
 
     <h1> Create a new Bike</h1>
 
-    <form action="{{ route('bike.store') }}" method="POST">
-        @csrf
+    <form action="{{ route('bike.store') }}" method="POST" enctype="multipart/form-data">
+        {{ csrf_field() }}
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="{{ old('name') }}">
         <br>
@@ -42,6 +42,8 @@
         <label for="description">Description</label>
         <input type="text" name="description" id="description" value="{{ old('description') }}">
         <br>
+        <label>Choose Images</label>
+        <input type="file" name="images" multiple>
 
 
         <button type="submit">Create</button>

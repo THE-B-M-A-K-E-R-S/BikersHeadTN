@@ -21,7 +21,13 @@ class Bike extends Model
     ];
 
 
-    
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'bike_id');
+    }
+
+
 
 
     // public function bikeType() {
