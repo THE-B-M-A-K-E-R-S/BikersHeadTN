@@ -43,7 +43,7 @@
         <input type="text" name="description" id="description" value="{{ old('description') }}">
         <br>
         <label>Choose Images</label>
-        <input type="file" name="images" multiple>
+        <input type="file" name="image[]" multiple>
 
 
         <button type="submit">Create</button>

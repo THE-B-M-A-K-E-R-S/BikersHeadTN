@@ -51,25 +51,27 @@ class BikeController extends Controller
             'description' => 'required',
         ]);
 
-        $bike = new Bike();
-        $bike->name = $request->name;
-        $bike->color = $request->color;
-        $bike->brand = $request->brand;
-        $bike->model = $request->model;
-        $bike->type = $request->type;
-        $bike->size = $request->size;
-        $bike->price = $request->price;
-        $bike->description = $request->description;
+        
 
-        $bike->save();
+        $bike = Bike::create($request->all());
 
-        foreach ($request->file('images') as $imagefile) {
-            $image = new Image;
-            $path = $imagefile->store('/images/resource', ['disk' =>   'my_files']);
-            $image->url = $path;
-            $image->bike_id = $bike->id;
-            $image->save();
+        if ($request->hasFile('image')) {
+            $uploadPath = 'uploads/bikes/';
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move('uploads/bike/', $filename);
+                $fileImagePathName = $uploadPath . '-' . $filename;
+                $bike->images()->create([
+
+                    'bike_id' => $bike->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
         }
+
+
         return redirect()->route('bike.index')
             ->with('success', 'Bike created successfully.');
     }

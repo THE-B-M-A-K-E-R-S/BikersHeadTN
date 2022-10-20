@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('pres_Name');
             $table->string('description');
             $table->timestamps();
-            $table->foreignId('association_type_id')
-                 ->constrained('association_type')
-                 ->onUpdate('restrict')
-                 ->onDelete('restrict');
+            // $table->foreignId('association_type_id')
+            //      ->constrained('association_type')
+            //      ->onUpdate('restrict')
+            //      ->onDelete('restrict');
         });
     }
 
