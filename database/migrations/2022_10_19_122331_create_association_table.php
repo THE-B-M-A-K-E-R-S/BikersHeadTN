@@ -24,8 +24,8 @@ return new class extends Migration
         });
         Schema::table('associations', function($table)
         {
-            $table->foreignId('association_type_id')
-                ->constrained('association_type')
+            $table->foreignId('association_types_id')
+                ->constrained('association_types')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
         });
