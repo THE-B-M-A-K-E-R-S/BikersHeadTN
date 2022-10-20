@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::get('/page1', function () {
     return '<h1>my first page</h1>';
 });
 
+Route::get('/associations', function (AssociationController $associationController){
+    return $associationController->index();
+});
 Route::get('/page2/{name?}/{age?}', function ($name = null, $age = null) {
     $emptyUrlCase =  !$name ? 'welcome to page 2' : 'welcome ' . $name . ' ';
     return response(!$age ? $emptyUrlCase : $emptyUrlCase . ' your age is ' . $age, 200);
