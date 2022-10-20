@@ -1,53 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
+<h1> Create a new Bike</h1>
 
-<body>
-
-
-    <h1> Create a new Bike</h1>
+<div class="container">
 
     <form action="{{ route('bike.store') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="{{ old('name') }}">
-        <br>
-        <label for="color">Color</label>
-        <input type="text" name="color" id="color" value="{{ old('color') }}">
-        <br>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input type="text" name="color" id="color" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" name="brand" id="brand" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" name="model" id="model" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <input type="text" name="type" id="type" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="size">Size</label>
+            <input type="text" name="size" id="size" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Choose Images</label>
+            <input type="file" name="image[]" multiple class="form-control">
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Create</button>
 
 
-        <label for="brand">Brand</label>
-        <input type="text" name="brand" id="brand" value="{{ old('brand') }}">
-        <br>
-        <label for="model">Model</label>
-        <input type="text" name="model" id="model" value="{{ old('model') }}">
-        <br>
-        <label for="type">Type</label>
-        <input type="text" name="type" id="type" value="{{ old('type') }}">
-        <br>
-
-        <label for="size">size</label>
-        <input type="text" name="size" id="size" value="{{ old('size') }}">
-        <br>
-        <label for="price">Price</label>
-        <input type="text" name="price" id="price" value="{{ old('price') }}">
-        <br>
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description" value="{{ old('description') }}">
-        <br>
-        <label>Choose Images</label>
-        <input type="file" name="image[]" multiple>
+</div>
 
 
-        <button type="submit">Create</button>
 
-</body>
-
-</html>
+@endsection
