@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <title>Add Trotinette Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
+@section('content')
     <div class="container mt-2">
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left mb-2">
                     <h2>A New Trotinette</h2>
                 </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('trotinettes.index') }}"> Back</a>
-                </div>
+               
             </div>
         </div>
         @if(session('status'))
@@ -113,10 +104,16 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary ml-3">Submit</button>
+
+                <div class="pull-left" style="padding-top:10px">
+                    <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                </div>
+
+                <div class="pull-right" style="padding-top:10px">
+                    <a class="btn btn-primary" href="{{ route('trotinettes.index') }}" enctype="multipart/form-data">
+                        Back</a>
+                </div>
             </div>
         </form>
     </div>
-</body>
-
-</html>
+    @endsection
