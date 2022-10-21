@@ -21,7 +21,7 @@
             <td>{{ $event->description }}</td>
             <td>{{ date('d-m-Y', strtotime($event->date)) }}</td>
             <td>{{ $event->location }}</td>
-            <td>{{ $event->eventType->name }}</td>
+            <td>{{ $event->eventType->type }}</td>
             <td>
                 <a {{--href="{{ route('balade.show', $balade->id) }}"--}}>Show</a>
                 <a {{--href="{{ route('balade.edit', $balade->id) }}"--}}>Edit</a>

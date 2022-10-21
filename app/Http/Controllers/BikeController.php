@@ -51,7 +51,7 @@ class BikeController extends Controller
             'description' => 'required',
         ]);
 
-        
+
 
         $bike = Bike::create($request->all());
 
@@ -64,7 +64,6 @@ class BikeController extends Controller
                 $imageFile->move('uploads/bike/', $filename);
                 $fileImagePathName = $uploadPath . '-' . $filename;
                 $bike->images()->create([
-
                     'bike_id' => $bike->id,
                     'image' => $fileImagePathName,
                 ]);

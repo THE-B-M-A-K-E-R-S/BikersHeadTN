@@ -23,11 +23,11 @@ class EventController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('layouts.event.create');
     }
 
     /**
@@ -38,7 +38,37 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'eventType' => 'required'
+        ]);
+
+
+
+       $event = Event::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $uploadPath = 'uploads/event/';
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move('uploads/event/', $filename);
+                $fileImagePathName = $uploadPath . '-' . $filename;
+               $event->images()->create([
+
+                    'event_id' =>$event->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
+        }
+
+
+        return redirect()->route('event.index')
+            ->with('success', 'Event created successfully.');
     }
 
     /**
@@ -49,18 +79,22 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+        return view('layouts.event.show', compact('event'));
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('layouts.event.edit', compact('event'));
     }
 
     /**
@@ -68,11 +102,17 @@ class EventController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+        $input = $request->all();
+
+        $event->update($input);
+        return redirect()->route('event.index')
+            ->with('success', 'Event updated successfully');
+
     }
 
     /**
@@ -83,6 +123,9 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+        return redirect()->route('event.index')
+            ->with('success', 'Event deleted successfully');
     }
 }

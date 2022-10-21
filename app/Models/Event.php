@@ -9,6 +9,14 @@ class Event extends Model
 {
     use HasFactory;
 
+
+
+    public function images()
+    {
+        return $this->hasMany(Event_image::class, 'event_id', 'id');
+    }
+
+
     public function eventType() {
         return $this->belongsTo(EventType::class);
     }
