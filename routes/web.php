@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
+Route::get('/bikes', function (BikeController $bikeController) {
+    // return balade index controller
+    return $bikeController->create();
+});
+
 Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
     return $baladeController->index();

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('place');
             $table->double('distance');
             $table->double('duration');
+            $table->integer('max_participants');
             $table->enum('difficulty', ['EASY', 'MEDIUM', 'HARD']);
 
 
