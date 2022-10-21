@@ -9,7 +9,7 @@ class Balade_image extends Model
 {
     use HasFactory;
 
-    protected $table = 'images';
+    protected $table = 'balade_images';
     protected $fillable = [
         'balade_id',
         'image',
