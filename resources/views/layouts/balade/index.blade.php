@@ -55,7 +55,7 @@
                 <div class="single-job-items mb-30 col-6">
                     <div class="job-items m-5">
                         <div class="company-img">
-                            <img src="/uploads/{{ $balade->image }}" alt="" style="width: 260px; height: 240px"/>
+                            <img src="{{url($balade->images[0]->image) }}" alt="" style="width: 260px; height: 240px"/>
                         </div>
                         <div class="job-tittle">
                             <a {{--href="{{ path('event_show', {'id': $balade->id}) }}"--}}><h4>{{ $balade->name }}</h4></a>

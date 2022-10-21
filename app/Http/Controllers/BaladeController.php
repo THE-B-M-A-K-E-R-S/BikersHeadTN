@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balade;
+use App\Models\BaladeType;
 use Illuminate\Http\Request;
 
 class BaladeController extends Controller
@@ -29,7 +30,9 @@ class BaladeController extends Controller
      */
     public function create()
     {
-        //
+
+        $baladeTypes = BaladeType::all();
+        return view('layouts.balade.create', compact('baladeTypes'));
     }
 
     /**
@@ -40,7 +43,37 @@ class BaladeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required',
+            'duration' => 'required',
+            'distance' => 'required',
+            'place' => 'required',
+            'max_participants' => 'required',
+            'balade_type_id' => 'required',
+
+        ]);
+
+        $balade = Balade::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $uploadPath = 'storage/balades/';
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move(base_path('/storage/app/public/balades'), $filename);
+                $fileImagePathName = $uploadPath . $filename;
+                $balade->images()->create([
+                    'bike_id' => $balade->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
+        }
+
+        return redirect()->route('balade.index')
+            ->with('success', 'Balade created successfully.');
     }
 
     /**
