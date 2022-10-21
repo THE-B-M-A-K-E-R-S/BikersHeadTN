@@ -14,10 +14,7 @@
                 <div class="pull-left">
                     <h2>Edit Trotinette</h2>
                 </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('trotinettes.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
+                
             </div>
         </div>
         @if(session('status'))
@@ -34,7 +31,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Model:</strong>
-                        <input type="text" name="nom" value="{{ $trotinette->name }}" class="form-control" placeholder="Model">
+                        <input type="text" name="nom" value="{{ $trotinette->nom }}" class="form-control" placeholder="Model">
                         @error('nom')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -104,6 +101,10 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                <div class="pull-right" style="padding-left:10px">
+                    <a class="btn btn-primary" href="{{ route('trotinettes.index') }}" enctype="multipart/form-data">
+                        Back</a>
+                </div>
             </div>
         </form>
     </div>

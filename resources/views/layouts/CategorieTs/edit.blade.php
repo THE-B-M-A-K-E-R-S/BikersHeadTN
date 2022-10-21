@@ -14,10 +14,7 @@
                 <div class="pull-left">
                     <h2>Edit A Type of Trotinette</h2>
                 </div>
-                <div class="pull-right">
-                    <a class="btn btn-primary" href="{{ route('categoriets.index') }}" enctype="multipart/form-data">
-                        Back</a>
-                </div>
+
             </div>
         </div>
         @if(session('status'))
@@ -41,6 +38,10 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Submit</button>
+                <div class="pull-right" style="padding-left:10px">
+                    <a class="btn btn-primary" href="{{ route('categoriets.index') }}" enctype="multipart/form-data">
+                        Back</a>
+                </div>
             </div>
         </form>
     </div>
