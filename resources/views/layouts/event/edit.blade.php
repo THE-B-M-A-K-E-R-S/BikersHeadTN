@@ -16,9 +16,7 @@
     <form action="{{ route('bike.update', $event->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="{{ $event->name }}">
-        <br>
+
         <label for="title">Title</label>
         <input type="text" name="title" id="title" value="{{ $event->title }}">
         <br>

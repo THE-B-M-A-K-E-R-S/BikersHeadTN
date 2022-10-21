@@ -15,10 +15,6 @@
 
     <a class="btn btn-primary" href="{{ route('event.index') }}"> Back</a>
 
-    <div class="form-group">
-        <strong>Name:</strong>
-        {{ $event->name }}
-    </div>
 
     <div class="form-group">
         <strong>Title:</strong>

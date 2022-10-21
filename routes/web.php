@@ -20,8 +20,13 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/bikes', function (BikeController $bikeController) {
-    // return balade index controller
+    // return bikes index controller
     return $bikeController->create();
+});
+
+Route::get('/events', function (EventController $eventController) {
+    // return event index controller
+    return $eventController->create();
 });
 
 Route::get('/balades', function (BaladeController $baladeController) {
@@ -64,6 +69,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         return view('admin/dashboard');
     });
     Route::resource('/bike', BikeController::class);
+    Route::resource('/event', EventController::class);
 });
 Auth::routes();
 

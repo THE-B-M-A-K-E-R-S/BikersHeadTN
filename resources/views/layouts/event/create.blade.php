@@ -8,10 +8,6 @@
     <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control">
-        </div>
-        <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title" class="form-control">
         </div>
