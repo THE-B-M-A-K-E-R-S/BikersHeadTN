@@ -4,6 +4,7 @@ use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BaladeTypeController;
+use App\Http\Controllers\EventTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::resource('/bike', BikeController::class);
     Route::resource('/event', EventController::class);
+    Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
 });
