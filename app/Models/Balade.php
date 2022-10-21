@@ -9,6 +9,18 @@ class Balade extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'date',
+        'place',
+        'distance',
+        'duration',
+        'max_participants',
+        'difficulty',
+        'balade_type_id',
+    ];
+
     public function baladeType() {
         return $this->belongsTo(BaladeType::class);
     }
