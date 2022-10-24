@@ -8,7 +8,8 @@
                 <div class="section-tittle mb-35">
                     <h2>Balades</h2>
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="post" {{--action="{{ path('event_search') }}"--}}>
+                        <form method="GET" action="{{ route('search') }}">
+                            {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item">
                                     <input type="text" name="search" id="input" class="form-control col-20" placeholder="search Balades"

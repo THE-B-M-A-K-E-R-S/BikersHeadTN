@@ -82,10 +82,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
-    
+
     Route::resource('trotinettes', TrotinetteController::class);
     Route::resource('categoriets', CategorieTController::class);
+
 });
+Route::get('/search/', [BaladeController::class, 'search'])->name('search');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
