@@ -14,9 +14,10 @@ class Association extends Model
         'number',
         'pres_name',
         'description',
+        'association_types_id',
     ];
 
     public function associationType() {
-        return $this->belongsTo(AssociationType::class);
+        return $this->belongsTo(AssociationType::class, "association_types_id");
     }
 }

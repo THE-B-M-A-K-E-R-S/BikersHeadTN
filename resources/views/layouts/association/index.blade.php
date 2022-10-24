@@ -1,6 +1,11 @@
+@extends('layouts.app')
+
+@section('content')
 <html lang="">
 
 <h1>All Associations</h1>
+<div class=" container-fluid col-12">
+    <div class="col-lg-12 col-md-12 container-fluid  d-flex flex-wrap">
 <table>
     <thead>
     <tr>
@@ -24,17 +29,19 @@
             <td>{{ $association->pres_Name }}</td>
             <td>{{ $association->associationType->name }}</td>
             <td>
-                <a {{--href="{{ route('balade.show', $balade->id) }}"--}}>Show</a>
-                <a {{--href="{{ route('balade.edit', $balade->id) }}"--}}>Edit</a>
-                <form {{--action="{{ route('balade.destroy', $balade->id) }}"--}} method="POST">
+                <a href="{{ route('association.show', $association->id) }}">Show</a>
+                <a href="{{ route('association.edit', $association->id) }}">Edit</a>
+                <form action="{{ route('association.destroy', $association->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button type="submit" >Delete</button>
                 </form>
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
-
+    </div>
+</div>
 </html>
+@endsection

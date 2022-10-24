@@ -45,9 +45,6 @@ Route::get('/page1', function () {
     return '<h1>my first page</h1>';
 });
 
-Route::get('/associations', function (AssociationController $associationController){
-    return $associationController->index();
-});
 Route::get('/page2/{name?}/{age?}', function ($name = null, $age = null) {
     $emptyUrlCase =  !$name ? 'welcome to page 2' : 'welcome ' . $name . ' ';
     return response(!$age ? $emptyUrlCase : $emptyUrlCase . ' your age is ' . $age, 200);
@@ -73,9 +70,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::resource('/bike', BikeController::class);
     Route::resource('/event', EventController::class);
-    Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
-    
+    Route::resource('/association', AssociationController::class);
     Route::resource('trotinettes', TrotinetteController::class);
     Route::resource('categoriets', CategorieTController::class);
 });
