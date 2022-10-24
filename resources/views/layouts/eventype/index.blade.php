@@ -16,13 +16,7 @@
 {{--                <td>{{ $eventType->id }}</td>--}}
 {{--                <td>{{ $eventType->name }}</td>--}}
 {{--                <td>--}}
-{{--                    <a href="{{ route('eventype.show', $eventType->id) }}">Show</a>--}}
-{{--                    <a href="{{ route('eventype.edit', $eventType->id) }}">Edit</a>--}}
-{{--                    <form action="{{ route('eventype.destroy', $eventType->id) }}" method="POST">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button type="submit">Delete</button>--}}
-{{--                    </form>--}}
+
 {{--                </td>--}}
 {{--            </tr>--}}
 {{--        @endforeach--}}
@@ -30,7 +24,8 @@
 {{--    </table>--}}
 {{--    </html>--}}
 {{--@endsection--}}
-
+@section('content')
+<h1><a href="{{ route('eventype.create') }}">Create Event type</a></h1>
 <div class="top-post-area">
     <div class="container">
         <div class="row">
@@ -87,7 +82,14 @@
                             <div class="job-tittle">
                                 <a {{--href="{{ path('event_show', {'id': $balade->id}) }}"--}}><h4>{{ $eventType->name }}</h4></a>
                             </div>
+                            <a href="{{ route('eventype.edit', $eventType->id) }}">Edit</a>
+                            <form action="{{ route('eventype.destroy', $eventType->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete</button>
+                            </form>
                         </div>
+
                     </div>
                 @endforeach
             </div>
@@ -96,7 +98,8 @@
 </div>
 
 
-<h1><a href="{{ route('balade.create') }}">Create Balade</a></h1>
+
+@endsection
 
 
 
