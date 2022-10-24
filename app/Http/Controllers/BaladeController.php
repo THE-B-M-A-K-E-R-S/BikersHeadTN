@@ -133,4 +133,26 @@ class BaladeController extends Controller
 
         return view('layouts.balade.index', compact('balades'));
     }
+
+    public function tri(Request $request){
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $balades = Balade::all();
+        }
+        else if ($tri == 'NAME') {
+            $balades = Balade::orderBy('name', 'ASC')->get();
+        }
+        else if ($tri == 'DATE'){
+            $balades = Balade::orderBy('date', 'ASC')->get();
+        }
+        else {
+            $balades = Balade::query()
+                ->where('difficulty', '=', $tri)
+                ->get();
+        }
+
+        return view('layouts.balade.index', compact('balades'));
+    }
 }
