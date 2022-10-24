@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1> Create a new Event</h1>
+    <h1> Create a new Balade Type</h1>
 
     <div class="container">
 
