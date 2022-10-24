@@ -28,10 +28,6 @@ Route::get('/bikes', function (BikeController $bikeController) {
     return $bikeController->create();
 });
 
-Route::get('/events', function (EventController $eventController) {
-    // return event index controller
-    return $eventController->index();
-});
 
 Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
@@ -82,7 +78,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
-    
+
     Route::resource('trotinettes', TrotinetteController::class);
     Route::resource('categoriets', CategorieTController::class);
 });

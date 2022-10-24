@@ -27,7 +27,7 @@ class EventTypeController extends Controller
      */
     public function create()
     {
-        return view('layouts.EventType.create');
+        return view('layouts.eventype.create');
     }
 
     /**
