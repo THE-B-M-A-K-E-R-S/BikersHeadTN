@@ -55,6 +55,11 @@
         {{ $balade->difficulty }}
     </div>
 
+    <div class="form-group">
+        <strong>Type:</strong>
+        {{ $balade->baladeType->name }}
+    </div>
+
 </body>
 
 </html>
