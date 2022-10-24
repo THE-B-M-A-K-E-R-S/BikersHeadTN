@@ -58,7 +58,7 @@
                             <img src="{{url($balade->images) }}" alt="Image" style="width: 260px; height: 240px"/>
                         </div>
                         <div class="job-tittle">
-                            <a {{--href="{{ path('event_show', {'id': $balade->id}) }}"--}}><h4>{{ $balade->name }}</h4></a>
+                            <a href="{{ route('balade.show', $balade->id) }}"><h4>{{ $balade->name }}</h4></a>
                             <h4> x {{--{{ event.nbPartMax - event.participants.count }}--}} places left !</h4>
                             <h4>{{ date('d-m-Y', strtotime($balade->date)) }}</h4>
                             <p>{{ $balade->description }}</p>
