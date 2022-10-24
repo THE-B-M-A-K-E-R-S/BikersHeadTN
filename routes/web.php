@@ -38,10 +38,6 @@ Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
     return $baladeController->index();
 });
-Route::get('/events', function (EventController $eventController) {
-    // return event index controller
-    return $eventController->index();
-});
 
 Route::get('/page1', function () {
     return '<h1>my first page</h1>';

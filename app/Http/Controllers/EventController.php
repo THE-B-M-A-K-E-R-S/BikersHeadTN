@@ -45,8 +45,7 @@ class EventController extends Controller
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'date' => 'date',
-            'image' => 'image',
+            'date' => 'required',
             'event_type_id' => 'required',
         ]);
 
