@@ -45,8 +45,7 @@ class EventController extends Controller
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'date' => 'date',
-            'image' => 'image',
+            'date' => 'required',
             'event_type_id' => 'required',
         ]);
 
@@ -129,5 +128,34 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('event.index')
             ->with('success', 'Event deleted successfully');
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $events = Event::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('layouts.event.index', compact('events'));
+    }
+
+    public function tri(Request $request){
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $events = Event::all();
+        }
+        else if ($tri == 'NAME') {
+            $events = Event::orderBy('title', 'ASC')->get();
+        }
+        else $events = Event::orderBy('date', 'ASC')->get();
+
+
+
+        return view('layouts.event.index', compact('events'));
     }
 }
