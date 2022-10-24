@@ -8,7 +8,8 @@
                 <div class="section-tittle mb-35">
                     <h2>Balades</h2>
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="post" {{--action="{{ path('event_search') }}"--}}>
+                        <form method="GET" action="{{ route('search') }}">
+                            {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item">
                                     <input type="text" name="search" id="input" class="form-control col-20" placeholder="search Balades"
@@ -24,17 +25,18 @@
 
                    {{--Tri--}}
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="post" {{--action="{{ path('event_tri') }}"--}}>
+                        <form method="GET" action="{{ route('tri') }}">
+                            {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item text-center">Trier Par</li>
                                 <li class="list-group-item">
                                     <select id="select" name="tri" class="form-control form-control-lg">
-                                        <option selected>id</option>
-                                        <option value="name">name</option>
-                                        <option>date</option>
-                                        <option>HARD</option>
-                                        <option>MEDIUM</option>
-                                        <option>EASY</option>
+                                        <option value="ALL" selected>All</option>
+                                        <option value="NAME">name</option>
+                                        <option value="DATE">date</option>
+                                        <option value="HARD">HARD</option>
+                                        <option value="MEDIUM">MEDIUM</option>
+                                        <option value="EASY">EASY</option>
                                     </select>
                                 </li>
                                 <li class="list-group-item"> <button  type="submit" class="button rounded-0 primary-bg text-black w-100 btn_1 boxed-btn col-20" style="height: 50px">
@@ -62,6 +64,7 @@
                             <h4> x {{--{{ event.nbPartMax - event.participants.count }}--}} places left !</h4>
                             <h4>{{ date('d-m-Y', strtotime($balade->date)) }}</h4>
                             <p>{{ $balade->description }}</p>
+                            <p>{{ $balade->difficulty }}</p>
 {{--
                             {% if (event.nbPartMax - event.participants.count)>0 and event.date|date('m-d-Y') > 'now'|date('m-d-Y') %}
 --}}

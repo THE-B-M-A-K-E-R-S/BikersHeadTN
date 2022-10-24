@@ -84,7 +84,8 @@ class BaladeController extends Controller
      */
     public function show($id)
     {
-        //
+        $balade = Balade::find($id);
+        return view('layouts.balade.show', compact('balade'));
     }
 
     /**
@@ -119,5 +120,39 @@ class BaladeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $balades = Balade::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('layouts.balade.index', compact('balades'));
+    }
+
+    public function tri(Request $request){
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $balades = Balade::all();
+        }
+        else if ($tri == 'NAME') {
+            $balades = Balade::orderBy('name', 'ASC')->get();
+        }
+        else if ($tri == 'DATE'){
+            $balades = Balade::orderBy('date', 'ASC')->get();
+        }
+        else {
+            $balades = Balade::query()
+                ->where('difficulty', '=', $tri)
+                ->get();
+        }
+
+        return view('layouts.balade.index', compact('balades'));
     }
 }
