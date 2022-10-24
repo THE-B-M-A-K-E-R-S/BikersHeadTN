@@ -42,12 +42,7 @@ class BaladeTypeController extends Controller
             'name' => 'required',
         ]);
 
-
-
         $baladeType = BaladeType::create($request->all());
-
-
-
         return redirect()->route('baladetype.index')
             ->with('success', 'BaladeType created successfully.');
     }
@@ -100,7 +95,7 @@ class BaladeTypeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

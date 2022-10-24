@@ -4,6 +4,7 @@ use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BaladeTypeController;
+use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\TrotinetteController;
 use App\Http\Controllers\CategorieTController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,12 @@ Route::get('/bikes', function (BikeController $bikeController) {
 
 Route::get('/events', function (EventController $eventController) {
     // return event index controller
-    return $eventController->create();
+    return $eventController->index();
+});
+
+Route::get('/balades', function (BaladeController $baladeController) {
+    // return balade index controller
+    return $baladeController->index();
 });
 
 Route::get('/balades', function (BaladeController $baladeController) {
@@ -73,6 +79,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::resource('/bike', BikeController::class);
     Route::resource('/event', EventController::class);
+    Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
     

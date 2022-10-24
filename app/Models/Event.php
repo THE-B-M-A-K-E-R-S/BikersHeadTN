@@ -14,7 +14,7 @@ class Event extends Model
         'title',
         'description',
         'location',
-        'eventType',
+        'eventype',
     ];
 
 
