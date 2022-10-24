@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaladeType;
 use App\Models\Event;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -27,7 +29,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('layouts.event.create');
+        $eventTypes = EventType::all();
+        return view('layouts.event.create',compact('eventTypes'));
     }
 
     /**
@@ -39,11 +42,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'eventype' => 'required'
+            'date' => 'date',
+            'image' => 'image',
+            'event_type_id' => 'required',
         ]);
 
 
@@ -51,21 +55,19 @@ class EventController extends Controller
        $event = Event::create($request->all());
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'uploads/event/';
+            $uploadPath = 'storage/events/';
 
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $imageFile->move('uploads/event/', $filename);
-                $fileImagePathName = $uploadPath . '-' . $filename;
-               $event->images()->create([
-
-                    'event_id' =>$event->id,
+                $imageFile->move(base_path('/storage/app/public/events'), $filename);
+                $fileImagePathName = $uploadPath . $filename;
+                $event->images()->create([
+                    'event_id' => $event->id,
                     'image' => $fileImagePathName,
                 ]);
             }
         }
-
 
         return redirect()->route('event.index')
             ->with('success', 'Event created successfully.');

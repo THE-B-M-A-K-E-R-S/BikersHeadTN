@@ -13,7 +13,7 @@
 
     <h1> Edit a EventType</h1>
 
-    <form action="{{ route('baladetype.update', $eventType->id) }}" method="POST">
+    <form action="{{ route('eventype.update', $eventType->id) }}" method="POST">
         @csrf
         @method('PUT')
 
