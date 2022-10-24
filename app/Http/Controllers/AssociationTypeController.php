@@ -32,7 +32,7 @@ class AssociationTypeController extends Controller
      */
     public function create()
     {
-        return view('layouts.tssociationtype.create');
+        return view('layouts.associationtype.create');
     }
 
     /**
@@ -111,7 +111,7 @@ class AssociationTypeController extends Controller
     {
         $associationType = AssociationType::find($id);
         $associationType->delete();
-        return redirect()->route('Associationtype.index')
+        return redirect()->route('associationtype.index')
             ->with('success', 'BaladeType deleted successfully');
     }
 }

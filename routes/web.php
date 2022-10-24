@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\AssociationTypeController;
 use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BaladeTypeController;
@@ -72,6 +73,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/event', EventController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
     Route::resource('/association', AssociationController::class);
+    Route::resource('/associationtype', AssociationTypeController::class);
     Route::resource('trotinettes', TrotinetteController::class);
     Route::resource('categoriets', CategorieTController::class);
 });
