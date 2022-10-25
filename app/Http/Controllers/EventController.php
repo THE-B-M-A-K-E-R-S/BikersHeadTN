@@ -44,9 +44,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'location' => 'required',
+            'title' => 'required|string|min:10|max:100',
+            'description' => 'required|string|min:15|max:255',
+            'location' => 'required|string|min:100',
             'date' => 'required',
             'event_type_id' => 'required',
         ]);
@@ -111,9 +111,9 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'location' => 'required',
+            'title' => 'required|string|min:10|max:100',
+            'description' => 'required|string|min:15|max:255',
+            'location' => 'required|string|min:100',
             'date' => 'required',
             'event_type_id' => 'required',
         ]);
