@@ -28,7 +28,14 @@ Route::get('/bikes', function (BikeController $bikeController) {
     // return bikes index controller
     return $bikeController->create();
 });
-
+Route::get('/trotinettes', function (TrotinetteController $trotinetteController) {
+    // return trotinette index controller
+    return $trotinetteController->index();
+});
+Route::get('/categoriets', function (CategorieTController $categorieTController) {
+    // return trotinette index controller
+    return $categorieTController->index();
+});
 
 Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
