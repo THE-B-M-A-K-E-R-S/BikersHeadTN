@@ -74,6 +74,8 @@
                                 @method('DELETE')
                                 <button type="submit" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Delete</button>
                             </form>
+                            <button type="submit" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn"><a href="{{ route('balade.edit', $balade->id) }}">Edit</a></button>
+
 
                         </div>
                     </div>

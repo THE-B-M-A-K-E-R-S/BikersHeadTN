@@ -99,7 +99,8 @@ class BaladeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $balade = Balade::find($id);
+        return view('layouts.balade.edit', compact('balade'));
     }
 
     /**
@@ -111,7 +112,23 @@ class BaladeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required',
+            'duration' => 'required',
+            'distance' => 'required',
+            'place' => 'required',
+            'max_participants' => 'required',
+        ]);
+
+        $balade = Balade::find($id);
+        $input = $request->all();
+
+        $balade->update($input);
+        return redirect()->route('balade.index')
+            ->with('success', 'Balade updated successfully');
     }
 
     /**
