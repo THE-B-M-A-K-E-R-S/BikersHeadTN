@@ -26,7 +26,13 @@ return new class extends Migration
             $table->string('description');
             $table->timestamps();
 
-         
+
+            // Foreign key
+            $table->foreignId('bike_type_id')
+                ->constrained('bike_types')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
+           
         });
     }
 
