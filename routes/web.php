@@ -5,6 +5,7 @@ use App\Http\Controllers\AssociationTypeController;
 use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BaladeTypeController;
+use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\TrotinetteController;
 use App\Http\Controllers\CategorieTController;
 use Illuminate\Support\Facades\Route;
@@ -28,18 +29,15 @@ Route::get('/bikes', function (BikeController $bikeController) {
     return $bikeController->create();
 });
 
-Route::get('/events', function (EventController $eventController) {
-    // return event index controller
-    return $eventController->create();
-});
 
 Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
     return $baladeController->index();
 });
-Route::get('/events', function (EventController $eventController) {
-    // return event index controller
-    return $eventController->index();
+
+Route::get('/balades', function (BaladeController $baladeController) {
+    // return balade index controller
+    return $baladeController->index();
 });
 
 Route::get('/page1', function () {
@@ -71,12 +69,21 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
     Route::resource('/bike', BikeController::class);
     Route::resource('/event', EventController::class);
+    Route::resource('/eventype', EventTypeController::class);
+    Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
+
     Route::resource('/association', AssociationController::class);
     Route::resource('/associationtype', AssociationTypeController::class);
     Route::resource('trotinettes', TrotinetteController::class);
     Route::resource('categoriets', CategorieTController::class);
+
 });
+Route::get('/search/', [BaladeController::class, 'search'])->name('search');
+Route::get('/tri/', [BaladeController::class, 'tri'])->name('tri');
+Route::get('/search_event/', [EventController::class, 'search'])->name('search');
+Route::get('/tri_event/', [EventController::class, 'tri'])->name('tri');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

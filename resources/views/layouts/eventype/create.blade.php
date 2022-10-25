@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1> Create a new Balade Type</h1>
+    <h1> Create a new Event Type</h1>
 
     <div class="container">
 
-        <form action="{{ route('baladetype.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('eventype.store') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">Name</label>
