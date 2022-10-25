@@ -61,15 +61,15 @@ class BaladeController extends Controller
         $balade = Balade::create($request->all());
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'storage/balades/';
+            $uploadPath = 'uploads/balade/';
 
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $imageFile->move(base_path('/storage/app/public/balades'), $filename);
-                $fileImagePathName = $uploadPath . $filename;
+                $imageFile->move('uploads/balade/', $filename);
+                $fileImagePathName = $filename;
                 $balade->images()->create([
-                    'bike_id' => $balade->id,
+                    'balade_id' => $balade->id,
                     'image' => $fileImagePathName,
                 ]);
             }
