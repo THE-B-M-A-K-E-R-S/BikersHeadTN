@@ -18,7 +18,8 @@ class BikeController extends Controller
     public function index()
     {
         $bikes = Bike::all();
-        return view('layouts.bike.index', compact('bikes'));
+        $images = Image::all();
+        return view('layouts.bike.index', compact('bikes' , 'images'));
     }
 
     /**
@@ -62,7 +63,7 @@ class BikeController extends Controller
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
                 $imageFile->move('uploads/bike/', $filename);
-                $fileImagePathName = $uploadPath . '-' . $filename;
+                $fileImagePathName = $filename;
                 $bike->images()->create([
                     'bike_id' => $bike->id,
                     'image' => $fileImagePathName,
