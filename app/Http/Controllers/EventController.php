@@ -149,7 +149,7 @@ class EventController extends Controller
         if ($tri == 'ALL') {
             $events = Event::all();
         }
-        else if ($tri == 'NAME') {
+        else if ($tri == 'TITLE') {
             $events = Event::orderBy('title', 'ASC')->get();
         }
         else $events = Event::orderBy('date', 'ASC')->get();

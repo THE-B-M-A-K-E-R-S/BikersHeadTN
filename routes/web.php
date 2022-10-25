@@ -81,6 +81,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 Route::get('/search/', [BaladeController::class, 'search'])->name('search');
 Route::get('/tri/', [BaladeController::class, 'tri'])->name('tri');
+Route::get('/search_event/', [EventController::class, 'search'])->name('search');
+Route::get('/tri_event/', [EventController::class, 'tri'])->name('tri');
 
 Auth::routes();
 
