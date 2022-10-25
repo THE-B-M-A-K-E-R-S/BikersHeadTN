@@ -17,7 +17,7 @@ class Bike extends Model
         'color',
         'brand',
         'model',
-        'type',
+        'bike_type_id',
         'size',
         'price',
         'description',

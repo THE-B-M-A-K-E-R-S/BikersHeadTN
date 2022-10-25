@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('brand');
             $table->string('model');
-            $table->string('type');
+           
             $table->string('size');
             $table->string('price');
             $table->string('description');
