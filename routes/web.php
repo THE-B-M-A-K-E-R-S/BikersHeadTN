@@ -40,6 +40,14 @@ Route::get('/events', function (EventController $eventController) {
     // return event index controller
     return $eventController->index();
 });
+Route::get('/trotinettes', function (TrotinetteController $trotinetteController) {
+    // return trotinette index controller
+    return $trotinetteController->index();
+});
+Route::get('/categoriets', function (CategorieTController $categorieTController) {
+    // return trotinette index controller
+    return $categorieTController->index();
+});
 
 Route::get('/page1', function () {
     return '<h1>my first page</h1>';
@@ -76,8 +84,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
     
-    Route::resource('trotinettes', TrotinetteController::class);
-    Route::resource('categoriets', CategorieTController::class);
+    Route::resource('/trotinettes', TrotinetteController::class);
+    Route::resource('/categoriets', CategorieTController::class);
 });
 Auth::routes();
 
