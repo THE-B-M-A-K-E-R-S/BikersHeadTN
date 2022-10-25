@@ -30,6 +30,9 @@
     </tbody>
 </table>
 
+<h1><a href="{{ route('baladetype.create') }}">Create Balade Type</a></h1>
+
+
 @endsection
 
 </html>
