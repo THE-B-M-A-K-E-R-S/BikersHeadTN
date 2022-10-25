@@ -8,7 +8,7 @@
                 <div class="section-tittle mb-35">
                     <h2>Balades</h2>
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="GET" action="{{ route('search') }}">
+                        <form method="GET" action="{{ route('balade_search') }}">
                             {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item">
@@ -25,7 +25,7 @@
 
                     {{--Tri--}}
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="GET" action="{{ route('tri') }}">
+                        <form method="GET" action="{{ route('balade_tri') }}">
                             {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item text-center">Trier Par</li>
@@ -79,6 +79,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row-cols-12 max-width-50px">
+    {!! $balades->appends(\Request::except('page'))->render() !!}
 </div>
 
 

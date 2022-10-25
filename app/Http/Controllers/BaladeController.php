@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Balade;
 use App\Models\BaladeType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BaladeController extends Controller
 {
@@ -18,7 +19,9 @@ class BaladeController extends Controller
     public function index()
     {
         // get all balades
-        $balades = Balade::all();
+        $balades = Balade::query()
+            ->where('name', 'LIKE', "%%")
+            ->paginate(1);
         // return view with balades
         return view('layouts.balade.index')->with('balades', $balades);
     }
@@ -122,35 +125,37 @@ class BaladeController extends Controller
         //
     }
 
-    public function search(Request $request){
+    public function balade_search(Request $request){
         // Get the search value from the request
         $search = $request->input('search');
 
         // Search in the title and body columns from the posts table
         $balades = Balade::query()
             ->where('name', 'LIKE', "%{$search}%")
-            ->get();
+            ->paginate(2);
 
         return view('layouts.balade.index', compact('balades'));
     }
 
-    public function tri(Request $request){
+    public function balade_tri(Request $request){
         // Get the search value from the request
         $tri = $request->input('tri');
 
         if ($tri == 'ALL') {
-            $balades = Balade::all();
+            $balades = Balade::query()
+                ->where('name', 'LIKE', "%%")
+                ->paginate(1);
         }
         else if ($tri == 'NAME') {
-            $balades = Balade::orderBy('name', 'ASC')->get();
+            $balades = Balade::orderBy('name', 'ASC')->paginate(2);
         }
         else if ($tri == 'DATE'){
-            $balades = Balade::orderBy('date', 'ASC')->get();
+            $balades = Balade::orderBy('date', 'ASC')->paginate(2);
         }
         else {
             $balades = Balade::query()
                 ->where('difficulty', '=', $tri)
-                ->get();
+                ->paginate(2);
         }
 
         return view('layouts.balade.index', compact('balades'));
