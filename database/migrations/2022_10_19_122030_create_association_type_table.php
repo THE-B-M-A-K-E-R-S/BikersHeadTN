@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('association_type');
+        Schema::dropIfExists('association_types');
     }
 };

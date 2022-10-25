@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balade;
+use App\Models\BaladeType;
 use Illuminate\Http\Request;
 
 class BaladeController extends Controller
@@ -29,7 +30,9 @@ class BaladeController extends Controller
      */
     public function create()
     {
-        //
+
+        $baladeTypes = BaladeType::all();
+        return view('layouts.balade.create', compact('baladeTypes'));
     }
 
     /**
@@ -40,7 +43,37 @@ class BaladeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required',
+            'duration' => 'required',
+            'distance' => 'required',
+            'place' => 'required',
+            'max_participants' => 'required',
+            'balade_type_id' => 'required',
+
+        ]);
+
+        $balade = Balade::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $uploadPath = 'storage/balades/';
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move(base_path('/storage/app/public/balades'), $filename);
+                $fileImagePathName = $uploadPath . $filename;
+                $balade->images()->create([
+                    'bike_id' => $balade->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
+        }
+
+        return redirect()->route('balade.index')
+            ->with('success', 'Balade created successfully.');
     }
 
     /**
@@ -51,7 +84,8 @@ class BaladeController extends Controller
      */
     public function show($id)
     {
-        //
+        $balade = Balade::find($id);
+        return view('layouts.balade.show', compact('balade'));
     }
 
     /**
@@ -86,5 +120,39 @@ class BaladeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $balades = Balade::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('layouts.balade.index', compact('balades'));
+    }
+
+    public function tri(Request $request){
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $balades = Balade::all();
+        }
+        else if ($tri == 'NAME') {
+            $balades = Balade::orderBy('name', 'ASC')->get();
+        }
+        else if ($tri == 'DATE'){
+            $balades = Balade::orderBy('date', 'ASC')->get();
+        }
+        else {
+            $balades = Balade::query()
+                ->where('difficulty', '=', $tri)
+                ->get();
+        }
+
+        return view('layouts.balade.index', compact('balades'));
     }
 }

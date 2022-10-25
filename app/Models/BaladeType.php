@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class BaladeType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+    ];
 
     public function balades() {
         return $this->hasMany(Balade::class);

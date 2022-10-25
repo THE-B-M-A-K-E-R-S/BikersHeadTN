@@ -20,14 +20,36 @@
             <input type="text" name="location" id="location" class="form-control">
         </div>
         <div class="form-group">
-            <label for="eventType">eventType</label>
-            <input type="text" name="eventType" id="eventType" class="form-control">
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" class="form-control">
         </div>
+        <div class="form-group">
+            <label for="image[]">Choose Images</label>
+            <input type="file" name="image[]" multiple class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="event_type_id">eventType</label>
+            <select class="form-select" name="event_type_id" id="event_type_id" style="color: #41A7A5" class="form-control form-control-lg">
+                @foreach ($eventTypes as $eventType)
+                    <option value="{{$eventType->id}}">{{$eventType->name}}</option>
+                @endforeach
+            </select>        </div>
 
         <button type="submit" class="btn btn-primary mt-4">Create</button>
 
     </form>
 </div>
+
+@if(count($errors) > 0)
+    <div class="p-1">
+        @foreach($errors->all() as $error)
+            <div class="alert alert-warning alert-danger fade show" role="alert">{{$error}} <button type="button" class="close"
+                                                                                                    data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button></div>
+        @endforeach
+    </div>
+@endif
 
 
 

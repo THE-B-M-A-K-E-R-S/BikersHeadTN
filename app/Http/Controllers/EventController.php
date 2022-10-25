@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BaladeType;
 use App\Models\Event;
+use App\Models\EventType;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -27,7 +29,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('layouts.event.create');
+        $eventTypes = EventType::all();
+        return view('layouts.event.create',compact('eventTypes'));
     }
 
     /**
@@ -39,11 +42,11 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'eventType' => 'required'
+            'date' => 'required',
+            'event_type_id' => 'required',
         ]);
 
 
@@ -51,21 +54,19 @@ class EventController extends Controller
        $event = Event::create($request->all());
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'uploads/event/';
+            $uploadPath = 'storage/events/';
 
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $imageFile->move('uploads/event/', $filename);
-                $fileImagePathName = $uploadPath . '-' . $filename;
-               $event->images()->create([
-
-                    'event_id' =>$event->id,
+                $imageFile->move(base_path('/storage/app/public/events'), $filename);
+                $fileImagePathName = $uploadPath . $filename;
+                $event->images()->create([
+                    'event_id' => $event->id,
                     'image' => $fileImagePathName,
                 ]);
             }
         }
-
 
         return redirect()->route('event.index')
             ->with('success', 'Event created successfully.');
@@ -127,5 +128,34 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('event.index')
             ->with('success', 'Event deleted successfully');
+    }
+
+    public function search(Request $request){
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $events = Event::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('layouts.event.index', compact('events'));
+    }
+
+    public function tri(Request $request){
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $events = Event::all();
+        }
+        else if ($tri == 'TITLE') {
+            $events = Event::orderBy('title', 'ASC')->get();
+        }
+        else $events = Event::orderBy('date', 'ASC')->get();
+
+
+
+        return view('layouts.event.index', compact('events'));
     }
 }

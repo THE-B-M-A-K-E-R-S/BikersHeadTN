@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Kyslik\ColumnSortable\ColumnSortableServiceProvider;
 
 return [
 
@@ -181,6 +182,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        ColumnSortableServiceProvider::class,
 
         /*
          * Package Service Providers...

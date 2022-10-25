@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventType;
+use App\Models\BaladeType;
 use Illuminate\Http\Request;
 
-class EventTypeController extends Controller
+class BaladeTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class EventTypeController extends Controller
      */
     public function index()
     {
-        // get all eventype
-        $eventTypes = EventType::all();
+        // get all baladeTypes
+        $baladeTypes = BaladeType::all();
         // return view with events
-        return view('layouts.eventype.index', compact('eventTypes'));
+        return view('layouts.baladetype.index', compact('baladeTypes'));
     }
 
     /**
@@ -27,14 +27,14 @@ class EventTypeController extends Controller
      */
     public function create()
     {
-        return view('layouts.eventype.create');
+        return view('layouts.BaladeType.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -42,21 +42,21 @@ class EventTypeController extends Controller
             'name' => 'required',
         ]);
 
-        $eventType = EventType::create($request->all());
-        return redirect()->route('eventype.index')
-            ->with('success', 'EventType created successfully.');
+        $baladeType = BaladeType::create($request->all());
+        return redirect()->route('baladetype.index')
+            ->with('success', 'BaladeType created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EventType  $eventType
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $eventType= EventType::find($id);
-        return view('layouts.eventype.show', compact('eventType'));
+        $baladeType = BaladeType::find($id);
+        return view('layouts.baladetype.show', compact('baladeType'));
 
 
     }
@@ -64,44 +64,44 @@ class EventTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EventType  $eventType
+     * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        $eventType = EventType::find($id);
-        return view('layouts.eventype.edit', compact('eventType'));
+        $baladeType = BaladeType::find($id);
+        return view('layouts.baladetype.edit', compact('baladeType'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EventType  $eventType
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $eventType = EventType::find($id);
+        $baladeType = BaladeType::find($id);
         $input = $request->all();
 
-        $eventType->update($input);
-        return redirect()->route('eventype.index')
-            ->with('success', 'EventType updated successfully');
+        $baladeType->update($input);
+        return redirect()->route('baladetype.index')
+            ->with('success', 'BaladeType updated successfully');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EventType  $eventType
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $eventType = EventType::find($id);
-        $eventType->delete();
-        return redirect()->route('eventype.index')
-            ->with('success', 'EventType deleted successfully');
+        $baladeType = BaladeType::find($id);
+        $baladeType->delete();
+        return redirect()->route('baladetype.index')
+            ->with('success', 'BaladeType deleted successfully');
     }
 }

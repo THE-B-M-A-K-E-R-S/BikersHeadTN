@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Association;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class AssociationController extends Controller
@@ -10,80 +14,113 @@ class AssociationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = $request->query('filter');
+        if (!empty($filter)) {
+            $associations = Association::sortable()
+                ->where('name', 'like', '%'.$filter.'%')
+                ->paginate(3);
+        } else {
+            $associations = Association::sortable()->paginate(3);
 
-        // get all events
-        $associations = Association::all();
-        // return view with events
-        return view('layouts.association.index', compact('associations'));
+        }
+        // return view with associations
+        return view('layouts.association.index', compact('associations','filter'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function create()
     {
-        //
+        return view('layouts.association.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'number' => 'required',
+            'pres_name' => 'required',
+            'description' => 'required',
+            'association_types_id' => 'required'
+        ]);
+
+
+
+        $association = Association::create($request->all());
+
+
+        return redirect()->route('association.index')
+            ->with('success', 'association created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Association  $association
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return Application|Factory|View
      */
-    public function show(Association $association)
+    public function show($id)
     {
-        //
+        $association = Association::find($id);
+        return view('layouts.association.show', compact('association'));
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Association  $association
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return Application|Factory|View
      */
-    public function edit(Association $association)
+    public function edit($id)
     {
-        //
+        $association = Association::find($id);
+        return view('layouts.association.edit', compact('association'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Association  $association
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Association $association)
+    public function update(Request $request, $id)
     {
-        //
+        $association = Association::find($id);
+        $input = $request->all();
+
+        $association->update($input);
+        return redirect()->route('association.index')
+            ->with('success', 'association updated successfully');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Association  $association
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Association $association)
+    public function destroy($id)
     {
-        //
+        $association = Association::find($id);
+        $association->delete();
+        return redirect()->route('association.index')
+            ->with('success', 'association deleted successfully');
     }
 }
