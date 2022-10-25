@@ -57,7 +57,9 @@
                         <div class="single-job-items mb-30 col-6">
                             <div class="job-items m-5">
                                 <div class="company-img">
-                                    <img src="{{url($event->images) }}" alt="Image" style="width: 260px; height: 240px"/>
+                                    @if (count($event->images) > 0)
+                                        <img src="{{url('/uploads/events/'. $event->images[count($event->images)-1]->image) }}" alt="Image" style="width: 260px; height: 240px"/>
+                                    @endif
                                 </div>
                                 <div class="job-tittle">
                                     <a href="{{ route('event.show', $event->id) }}"><h4>{{ $event->title }}</h4></a>
@@ -80,7 +82,9 @@
     </div>
 
 
-
+    <div class="row-cols-12 max-width-50px">
+        {!! $events->appends(\Request::except('page'))->render() !!}
+    </div>
 @endsection
 
 

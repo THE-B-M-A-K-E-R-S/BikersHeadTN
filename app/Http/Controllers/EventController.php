@@ -17,7 +17,9 @@ class EventController extends Controller
     public function index()
     {
         // get all events
-        $events = Event::all();
+        $events = Event::query()
+//            ->where('title', 'LIKE', "%%")
+            ->paginate(2);
         // return view with events
         return view('layouts.event.index', compact('events'));
     }
@@ -54,19 +56,19 @@ class EventController extends Controller
        $event = Event::create($request->all());
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'storage/events/';
 
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $imageFile->move(base_path('/storage/app/public/events'), $filename);
-                $fileImagePathName = $uploadPath . $filename;
+                $imageFile->move('uploads/events/', $filename);
+                $fileImagePathName = $filename;
                 $event->images()->create([
                     'event_id' => $event->id,
                     'image' => $fileImagePathName,
                 ]);
             }
         }
+
 
         return redirect()->route('event.index')
             ->with('success', 'Event created successfully.');
@@ -116,7 +118,22 @@ class EventController extends Controller
             'event_type_id' => 'required',
         ]);
         $event = Event::find($id);
+        if ($request->hasFile('image')) {
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move('uploads/events/', $filename);
+                $fileImagePathName = $filename;
+                $event->images()->create([
+                    'event_id' => $event->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
+        }
         $input = $request->all();
+
+
 
         $event->update($input);
         return redirect()->route('event.index')
