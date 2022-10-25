@@ -23,7 +23,7 @@
                     </div>
 
 
-                   {{--Tri--}}
+                    {{--Tri--}}
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
                         <form method="GET" action="{{ route('tri') }}">
                             {{csrf_field()}}
