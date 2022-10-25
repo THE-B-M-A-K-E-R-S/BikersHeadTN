@@ -57,7 +57,9 @@
                 <div class="single-job-items mb-30 col-6">
                     <div class="job-items m-5">
                         <div class="company-img">
-                            <img src="{{url($balade->images) }}" alt="Image" style="width: 260px; height: 240px"/>
+                            @if (count($balade->images) > 0)
+                                <img src="{{url('/uploads/balade/'. $balade->images[0]->image) }}" alt="Image" style="width: 260px; height: 240px"/>
+                            @endif
                         </div>
                         <div class="job-tittle">
                             <a href="{{ route('balade.show', $balade->id) }}"><h4>{{ $balade->name }}</h4></a>

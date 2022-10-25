@@ -64,7 +64,7 @@
                                     <h4>{{ date('d-m-Y', strtotime($event->date)) }}</h4>
                                     <p>{{ $event->description }}</p>
                                     <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn"><a href="{{ route('event.edit', $event->id) }}">Edit</a></button>
-                                    <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn"><a href="{{ route('event.show', $event->id) }}">Show</button>
+                                    <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn"><a href="{{ route('event.show', $event->id) }}">Show</a></button>
                                     <form action="{{ route('event.destroy', $event->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
