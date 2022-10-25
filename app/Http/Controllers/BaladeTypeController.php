@@ -82,6 +82,10 @@ class BaladeTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
         $baladeType = BaladeType::find($id);
         $input = $request->all();
 

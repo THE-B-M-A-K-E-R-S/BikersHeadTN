@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
+@section('content')
 
 
     <h1> Edit a BaladeType</h1>
@@ -22,12 +14,21 @@
         <br>
 
 
-        <button type="submit">Update</button>
+        <button type="submit" class="btn btn-primary mt-4">Update</button>
 
     </form>
 
+    @if(count($errors) > 0)
+        <div class="p-1">
+            @foreach($errors->all() as $error)
+                <div class="alert alert-warning alert-danger fade show" role="alert">{{$error}} <button type="button" class="close"
+                                                                                                        data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></div>
+            @endforeach
+        </div>
+    @endif
 
 
-</body>
 
-</html>
+@endsection
