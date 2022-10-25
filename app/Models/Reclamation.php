@@ -12,7 +12,7 @@ class Reclamation extends Model
     protected $fillable = [
         'description',
         'date',
-        'satisfaction level',
+        'satisfaction_level',
     ];
 
     public function reclamationType(){

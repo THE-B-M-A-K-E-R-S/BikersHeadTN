@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 namespace App\Http\Controllers;
 
 use App\Models\Reclamation;
+use App\Models\ReclamationType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -21,7 +22,8 @@ class ReclamationController extends Controller
 
     public function create(): View|Factory|Application
     {
-        return view('layouts.event.create');
+        $reclamationTypes = ReclamationType::all();
+        return view('layouts.reclamation.create', compact('reclamationTypes'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -29,12 +31,12 @@ class ReclamationController extends Controller
         $request->validate([
             'description' => 'required',
             'date' => 'required',
-            'satisfaction level' => 'required',
+            'satisfaction_level' => 'required',
         ]);
 
         $reclamation = Reclamation::create($request->all());
 
-        return redirect()->route('reclamations.index')
+        return redirect()->route('reclamation.index')
             ->with('success', 'Reclamation reclamée.');
     }
 
@@ -47,7 +49,8 @@ class ReclamationController extends Controller
     public function edit($id): Factory|View|Application
     {
         $reclamation = Reclamation::find($id);
-        return view('layouts.reclamation.edit', compact('reclamation'));
+        $reclamationTypes = ReclamationType::all();
+        return view('layouts.reclamation.edit', compact('reclamation', 'reclamationTypes'));
     }
 
     public function update(Request $request, $id): RedirectResponse

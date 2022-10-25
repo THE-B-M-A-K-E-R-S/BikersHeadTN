@@ -17,12 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->timestamp('date');
-            $table->enum('satisfaction level', ['very low', 'low', 'medium', 'high']);
-        });
-
-        Schema::create('reclamation_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('label');
+            $table->enum('satisfaction_level', ['very low', 'low', 'medium', 'high']);
+            $table->timestamps();
         });
     }
 
@@ -34,6 +30,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('reclamations');
-        Schema::dropIfExists('reclamation_types');
     }
 };

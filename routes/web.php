@@ -6,6 +6,8 @@ use App\Http\Controllers\BaladeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\BaladeTypeController;
 use App\Http\Controllers\EventTypeController;
+use App\Http\Controllers\ReclamationController;
+use App\Http\Controllers\ReclamationTypeController;
 use App\Http\Controllers\TrotinetteController;
 use App\Http\Controllers\CategorieTController;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +74,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
     Route::resource('/baladetype', BaladeTypeController::class);
+    Route::resource('/reclamation', ReclamationController::class);
+    Route::resource('/reclamationtype', ReclamationTypeController::class);
 
     Route::resource('/association', AssociationController::class);
     Route::resource('/associationtype', AssociationTypeController::class);
