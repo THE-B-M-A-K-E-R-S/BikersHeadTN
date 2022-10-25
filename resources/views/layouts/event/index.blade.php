@@ -5,6 +5,7 @@
     <div class="top-post-area">
         <div class="container">
             <h3><a href="{{ route('event.create') }}">Create Event</a></h3>
+            <h3><a href="{{ route('eventype.create') }}">Create Type</a></h3>
 
             <div class="row">
                 <div class="col-24">
