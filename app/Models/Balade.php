@@ -29,4 +29,8 @@ class Balade extends Model
     {
         return $this->hasMany(Balade_image::class, 'balade_id', 'id');
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'user_balade', 'balade_id', 'user_id');
+    }
 }

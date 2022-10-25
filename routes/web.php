@@ -30,7 +30,14 @@ Route::get('/bikes', function (BikeController $bikeController) {
     // return bikes index controller
     return $bikeController->create();
 });
-
+Route::get('/trotinettes', function (TrotinetteController $trotinetteController) {
+    // return trotinette index controller
+    return $trotinetteController->index();
+});
+Route::get('/categoriets', function (CategorieTController $categorieTController) {
+    // return trotinette index controller
+    return $categorieTController->index();
+});
 
 Route::get('/balades', function (BaladeController $baladeController) {
     // return balade index controller
@@ -83,8 +90,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('categoriets', CategorieTController::class);
 
 });
-Route::get('/search/', [BaladeController::class, 'search'])->name('search');
-Route::get('/tri/', [BaladeController::class, 'tri'])->name('tri');
+Route::get('/balade_search/', [BaladeController::class, 'balade_search'])->name('balade_search');
+Route::get('/balade_tri/', [BaladeController::class, 'balade_tri'])->name('balade_tri');
 Route::get('/search_event/', [EventController::class, 'search'])->name('search');
 Route::get('/tri_event/', [EventController::class, 'tri'])->name('tri');
 

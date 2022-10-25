@@ -8,7 +8,7 @@
                 <div class="section-tittle mb-35">
                     <h2>Balades</h2>
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="GET" action="{{ route('search') }}">
+                        <form method="GET" action="{{ route('balade_search') }}">
                             {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item">
@@ -25,7 +25,7 @@
 
                     {{--Tri--}}
                     <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                        <form method="GET" action="{{ route('tri') }}">
+                        <form method="GET" action="{{ route('balade_tri') }}">
                             {{csrf_field()}}
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item text-center">Trier Par</li>
@@ -57,21 +57,28 @@
                 <div class="single-job-items mb-30 col-6">
                     <div class="job-items m-5">
                         <div class="company-img">
-                            <img src="{{url($balade->images) }}" alt="Image" style="width: 260px; height: 240px"/>
+                            @if (count($balade->images) > 0)
+                                <img src="{{url('/uploads/balade/'. $balade->images[0]->image) }}" alt="Image" style="width: 260px; height: 240px"/>
+                            @endif
                         </div>
                         <div class="job-tittle">
                             <a href="{{ route('balade.show', $balade->id) }}"><h4>{{ $balade->name }}</h4></a>
-                            <h4> x {{--{{ event.nbPartMax - event.participants.count }}--}} places left !</h4>
+                            <h4 style="color: red">{{$balade->max_participants -  count($balade->users)}} places left !</h4>
                             <h4>{{ date('d-m-Y', strtotime($balade->date)) }}</h4>
                             <p>{{ $balade->description }}</p>
                             <p>{{ $balade->difficulty }}</p>
-{{--
-                            {% if (event.nbPartMax - event.participants.count)>0 and event.date|date('m-d-Y') > 'now'|date('m-d-Y') %}
---}}
-                            <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Participate</button>
-{{--
-                            {% endif %}
---}}
+
+                            @if ($balade->max_participants -  count($balade->users) > 0)
+                                <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Participate</button>
+                            @endif
+                            <form action="{{ route('balade.destroy', $balade->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Delete</button>
+                            </form>
+                            <button type="submit" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn"><a href="{{ route('balade.edit', $balade->id) }}">Edit</a></button>
+
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +86,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="row-cols-12 max-width-50px">
+    {!! $balades->appends(\Request::except('page'))->render() !!}
 </div>
 
 
