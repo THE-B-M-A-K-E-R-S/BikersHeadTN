@@ -122,7 +122,10 @@ class BaladeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $balade = Balade::find($id);
+        $balade->delete();
+        return redirect()->route('balade.index')
+            ->with('success', '$balade deleted successfully');
     }
 
     public function balade_search(Request $request){
