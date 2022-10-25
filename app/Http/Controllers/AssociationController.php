@@ -16,14 +16,20 @@ class AssociationController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        // get all associations
-        $associations = association::all();
-        // return view with associations
-        return view('layouts.association.index', compact('associations'));
-    }
+        $filter = $request->query('filter');
+        if (!empty($filter)) {
+            $associations = Association::sortable()
+                ->where('name', 'like', '%'.$filter.'%')
+                ->paginate(3);
+        } else {
+            $associations = Association::sortable()->paginate(3);
 
+        }
+        // return view with associations
+        return view('layouts.association.index', compact('associations','filter'));
+    }
     /**
      * Show the form for creating a new resource.
      *
