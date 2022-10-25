@@ -95,7 +95,8 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
-        return view('layouts.event.edit', compact('event'));
+        $eventTypes = EventType::all();
+        return view('layouts.event.edit', compact('event','eventTypes'));
     }
 
     /**
@@ -107,6 +108,13 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'date' => 'required',
+            'event_type_id' => 'required',
+        ]);
         $event = Event::find($id);
         $input = $request->all();
 
