@@ -4,6 +4,7 @@
 <html lang="">
 
 <h1>All Associations</h1>
+<h4><a href="{{ route('association.create') }}">Create Association</a></h4>
 <form class="form-inline" method="GET">
     <div class="form-group mb-2">
         <label for="filter" class="col-sm-2 col-form-label">Filter</label>
@@ -21,7 +22,7 @@
         <th>@sortablelink('description', 'Description')</th>
         <th>@sortablelink('address', 'Address')</th>
         <th>@sortablelink('number', 'Number')</th>
-        <th>@sortablelink('pres_Name', 'President Name')</th>
+        <th>@sortablelink('pres_name', 'President Name')</th>
         <th>@sortablelink('type', 'Type')</th>
     </tr>
     </thead>

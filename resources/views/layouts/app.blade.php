@@ -192,6 +192,8 @@
                                 <a class="nav-link " href=" {{ route('balade.index') }} " role="button">Balades</a>
                                 <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
                                 <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button" >Trotinettes</a>
+                                <a class="nav-link " href=" {{ route('association.index') }} " role="button" >Associations</a>
+
                     </div>
                     <!-- Right elements -->
                 </div>
