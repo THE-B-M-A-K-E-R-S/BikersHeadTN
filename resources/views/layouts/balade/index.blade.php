@@ -69,6 +69,12 @@
                             @if ($balade->max_participants -  count($balade->users) > 0)
                                 <button type="button" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Participate</button>
                             @endif
+                            <form action="{{ route('balade.destroy', $balade->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="button rounded-0 primary-bg w-100 btn_1 boxed-btn">Delete</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
