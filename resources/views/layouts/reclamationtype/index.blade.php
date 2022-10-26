@@ -11,7 +11,7 @@
                     <div class="section-tittle mb-35">
                         <h2>Complaints</h2>
                         <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                            <form method="GET" action="{{ route('search') }}">
+                            <form method="GET" action="{{ route('search_reclamationtype') }}">
                                 {{csrf_field()}}
                                 <ul class="list-group list-group-horizontal">
                                     <li class="list-group-item">
@@ -28,15 +28,14 @@
 
                         {{--Tri--}}
                         <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                            <form method="GET" action="{{ route('tri') }}">
+                            <form method="GET" action="{{ route('tri_reclamationtype') }}">
                                 {{csrf_field()}}
                                 <ul class="list-group list-group-horizontal">
                                     <li class="list-group-item text-center">Trier Par</li>
                                     <li class="list-group-item">
                                         <select id="select" name="tri" class="form-control form-control-lg">
                                             <option value="ALL" selected>All</option>
-                                            <option value="TITLE">reclamation type</option>
-                                            <option value="DATE">date</option>
+                                            <option value="LABEL">reclamation type</option>
                                         </select>
                                     </li>
                                     <li class="list-group-item"> <button  type="submit" class="button rounded-0 primary-bg text-black w-100 btn_1 boxed-btn col-20" style="height: 50px">

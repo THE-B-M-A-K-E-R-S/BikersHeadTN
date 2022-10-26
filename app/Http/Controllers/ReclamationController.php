@@ -71,4 +71,35 @@ class ReclamationController extends Controller
         return redirect()->route('reclamation.index')
             ->with('success', 'Reclamation deleted successfully');
     }
+
+    public function reclamation_search(Request $request): Factory|View|Application
+    {
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search in the title and body columns from the posts table
+        $reclamations = Reclamation::query()
+            ->where('description', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('layouts.reclamation.index', compact('reclamations'));
+    }
+
+    public function reclamation_tri(Request $request): Factory|View|Application
+    {
+        // Get the search value from the request
+        $tri = $request->input('tri');
+
+        if ($tri == 'ALL') {
+            $reclamations = Reclamation::all();
+        }
+        else if ($tri == 'DESCRIPTION') {
+            $reclamations = Reclamation::orderBy('description', 'ASC')->get();
+        }
+        else $reclamations = Reclamation::orderBy('date', 'ASC')->get();
+
+
+
+        return view('layouts.reclamation.index', compact('reclamations'));
+    }
 }

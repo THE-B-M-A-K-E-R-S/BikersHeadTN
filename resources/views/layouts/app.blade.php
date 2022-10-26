@@ -197,13 +197,14 @@
                             @endguest
                         </div>
 
-                        {{-- route to events--}}
-                        <a class="nav-link  " href=" {{ route('event.index') }} ">Events</a>
-                                <a class="nav-link  " href=" {{ route('eventype.index') }} ">Events Type</a>
-                        <a class="nav-link " href=" {{ route('balade.index') }} " role="button">Balades</a>
-                        <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
-                        <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button">Trotinettes</a>
-                        <a class="nav-link " href=" {{ route('association.index') }} " role="button">Associations</a>
+{{--route to events--}}
+                                <a class="nav-link  " href=" {{ route('event.index') }} ">Events</a>
+                                <a class="nav-link " href=" {{ route('balade.index') }} " role="button">Balades</a>
+                                <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
+                                <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button" >Trotinettes</a>
+                                <a class="nav-link " href=" {{ route('association.index') }} " role="button" >Associations</a>
+                                <a class="nav-link " href=" {{ route('reclamation.index') }} " role="button" >Complaints</a>
+                                <a class="nav-link " href=" {{ route('reclamationtype.index') }} " role="button" >Complain Types</a>
 
                     </div>
                     <!-- Right elements -->

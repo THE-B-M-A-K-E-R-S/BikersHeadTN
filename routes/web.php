@@ -12,6 +12,11 @@ use App\Http\Controllers\CategorieTController;
 use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\ReclamationTypeController;
 use App\Http\Controllers\TrotinetteController;
+use App\Http\Controllers\CategorieTController;
+use App\Models\ReclamationType;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BikeController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AssociationTypeController;
 
@@ -97,6 +102,10 @@ Route::get('/balade_search/', [BaladeController::class, 'balade_search'])->name(
 Route::get('/balade_tri/', [BaladeController::class, 'balade_tri'])->name('balade_tri');
 Route::get('/search_event/', [EventController::class, 'search'])->name('search');
 Route::get('/tri_event/', [EventController::class, 'tri'])->name('tri');
+Route::get('/tri_reclamation/', [ReclamationController::class, 'reclamation_tri'])->name('reclamation_tri');
+Route::get('/tri_reclamationtype/', [ReclamationController::class, 'reclamationtype_tri'])->name('reclamationtype_tri');
+Route::get('/search_reclamation/', [ReclamationController::class, 'reclamation_search'])->name('reclamation_search');
+Route::get('/search_reclamationtype/', [ReclamationType::class, 'reclamationtype_search'])->name('reclamationtype_search');
 
 Auth::routes();
 
