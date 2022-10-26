@@ -28,8 +28,13 @@
                 <input type="text" name="pres_name" id="pres_name" class="form-control">
             </div>
             <div class="form-group">
-                <label for="association_types_id">Association Type</label>
-                <input type="text" name="association_types_id" id="association_types_id" class="form-control">
+                <label for="association_types_id">Type</label>
+                <select class="form-select" name="association_types_id" id="association_types_id" style="color: #41A7A5" class="form-control ">
+                    @foreach ($associationTypes as $associationType)
+                        <option value="{{$associationType->id}}">{{$associationType->name}}</option>
+                    @endforeach
+                </select>
+
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Create</button>

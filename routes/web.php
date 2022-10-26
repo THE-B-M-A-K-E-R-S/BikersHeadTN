@@ -12,11 +12,7 @@ use App\Http\Controllers\CategorieTController;
 use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\ReclamationTypeController;
 use App\Http\Controllers\TrotinetteController;
-use App\Http\Controllers\CategorieTController;
 use App\Models\ReclamationType;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BikeController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AssociationTypeController;
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Association;
+use App\Models\AssociationType;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -37,7 +38,8 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        return view('layouts.association.create');
+        $associationTypes = AssociationType::all();
+        return view('layouts.association.create', compact('associationTypes'));
     }
 
     /**
