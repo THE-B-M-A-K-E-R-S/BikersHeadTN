@@ -19,7 +19,7 @@ class EventController extends Controller
         // get all events
         $events = Event::query()
 //            ->where('title', 'LIKE', "%%")
-            ->paginate(1);
+            ->paginate(2);
         // return view with events
         return view('layouts.event.index', compact('events'));
     }
@@ -44,9 +44,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|min:10|max:100',
-            'description' => 'required|string|min:15|max:255',
-            'location' => 'required|string|min:100',
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
             'date' => 'required',
             'event_type_id' => 'required',
         ]);
@@ -111,9 +111,9 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|string|min:10|max:100',
-            'description' => 'required|string|min:15|max:255',
-            'location' => 'required|string|min:100',
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
             'date' => 'required',
             'event_type_id' => 'required',
         ]);
@@ -162,7 +162,7 @@ class EventController extends Controller
         // Search in the title and body columns from the posts table
         $events = Event::query()
             ->where('title', 'LIKE', "%{$search}%")
-            ->get();
+            ->paginate(2);
 
         return view('layouts.event.index', compact('events'));
     }
@@ -172,12 +172,15 @@ class EventController extends Controller
         $tri = $request->input('tri');
 
         if ($tri == 'ALL') {
-            $events = Event::all();
+            $events = Event::all()
+                ->paginate(2);
         }
         else if ($tri == 'TITLE') {
-            $events = Event::orderBy('title', 'ASC')->get();
+            $events = Event::orderBy('title', 'ASC')
+                ->paginate(2);
         }
-        else $events = Event::orderBy('date', 'ASC')->get();
+        else $events = Event::orderBy('date', 'ASC')
+            ->paginate(2);
 
 
 

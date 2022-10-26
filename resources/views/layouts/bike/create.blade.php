@@ -52,22 +52,25 @@
 
         </div>
 
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha" id="feedback-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}">
+        </div>
+
         <button type="submit" class="btn btn-primary mt-4">Create</button>
 
 
 </div>
 
 @if(count($errors) > 0)
-    <div class="p-1">
-        @foreach($errors->all() as $error)
-            <div class="alert alert-warning alert-danger fade show" role="alert">{{$error}} <button type="button" class="close"
-                                                                                                    data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button></div>
-        @endforeach
-    </div>
+<div class="p-1">
+    @foreach($errors->all() as $error)
+    <div class="alert alert-warning alert-danger fade show" role="alert">{{$error}} <button type="button" class="close"
+            data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button></div>
+    @endforeach
+</div>
 @endif
 
 
 @endsection
-
