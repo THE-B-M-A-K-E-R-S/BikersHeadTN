@@ -18,7 +18,8 @@ class ReclamationController extends Controller
     {
         $reclamations = Reclamation::query()
             ->where('description', 'LIKE', "%%")
-            ->paginate(3);
+            ->paginate(99);
+
         return view('layouts.reclamation.index', compact('reclamations'));
     }
 
