@@ -99,9 +99,9 @@ Route::get('/balade_tri/', [BaladeController::class, 'balade_tri'])->name('balad
 Route::get('/search_event/', [EventController::class, 'search'])->name('search');
 Route::get('/tri_event/', [EventController::class, 'tri'])->name('tri');
 Route::get('/tri_reclamation/', [ReclamationController::class, 'reclamation_tri'])->name('reclamation_tri');
-Route::get('/tri_reclamationtype/', [ReclamationController::class, 'reclamationtype_tri'])->name('reclamationtype_tri');
+Route::get('/tri_reclamationtype/', [ReclamationTypeController::class, 'tri_reclamationtype'])->name('reclamationtype_tri');
 Route::get('/search_reclamation/', [ReclamationController::class, 'reclamation_search'])->name('reclamation_search');
-Route::get('/search_reclamationtype/', [ReclamationType::class, 'reclamationtype_search'])->name('reclamationtype_search');
+Route::get('/reclamationtype_search/', [ReclamationTypeController::class, 'reclamationtype_search'])->name('reclamationtype_search');
 
 Auth::routes();
 
