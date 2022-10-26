@@ -17,7 +17,9 @@ class EventController extends Controller
     public function index()
     {
         // get all events
-        $events = Event::all();
+        $events = Event::query()
+//            ->where('title', 'LIKE', "%%")
+            ->paginate(2);
         // return view with events
         return view('layouts.event.index', compact('events'));
     }
@@ -42,9 +44,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'location' => 'required',
+            'title' => 'required|string|min:10|max:100',
+            'description' => 'required|string|min:15|max:255',
+            'location' => 'required|string|min:100',
             'date' => 'required',
             'event_type_id' => 'required',
         ]);
@@ -54,19 +56,19 @@ class EventController extends Controller
        $event = Event::create($request->all());
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'storage/events/';
 
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension();
                 $filename = time() . '.' . $extension;
-                $imageFile->move(base_path('/storage/app/public/events'), $filename);
-                $fileImagePathName = $uploadPath . $filename;
+                $imageFile->move('uploads/events/', $filename);
+                $fileImagePathName = $filename;
                 $event->images()->create([
                     'event_id' => $event->id,
                     'image' => $fileImagePathName,
                 ]);
             }
         }
+
 
         return redirect()->route('event.index')
             ->with('success', 'Event created successfully.');
@@ -95,7 +97,8 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::find($id);
-        return view('layouts.event.edit', compact('event'));
+        $eventTypes = EventType::all();
+        return view('layouts.event.edit', compact('event','eventTypes'));
     }
 
     /**
@@ -107,8 +110,30 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|min:10|max:100',
+            'description' => 'required|string|min:15|max:255',
+            'location' => 'required|string|min:100',
+            'date' => 'required',
+            'event_type_id' => 'required',
+        ]);
         $event = Event::find($id);
+        if ($request->hasFile('image')) {
+
+            foreach ($request->file('image') as $imageFile) {
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move('uploads/events/', $filename);
+                $fileImagePathName = $filename;
+                $event->images()->create([
+                    'event_id' => $event->id,
+                    'image' => $fileImagePathName,
+                ]);
+            }
+        }
         $input = $request->all();
+
+
 
         $event->update($input);
         return redirect()->route('event.index')

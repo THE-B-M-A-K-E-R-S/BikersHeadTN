@@ -24,8 +24,14 @@
             <input type="text" name="model" id="model" class="form-control">
         </div>
         <div class="form-group">
-            <label for="type">Type</label>
-            <input type="text" name="type" id="type" class="form-control">
+            <label for="bike_type_id">Type</label>
+            <select class="form-select" name="bike_type_id" id="bike_type_id" style="color: #41A7A5"
+                class="form-control form-control-lg">
+                @foreach ($bikeTypes as $bikeType)
+                <option value="{{$bikeType->id}}">{{$bikeType->name}}</option>
+                @endforeach
+            </select>
+
         </div>
         <div class="form-group">
             <label for="size">Size</label>
@@ -51,6 +57,17 @@
 
 </div>
 
+@if(count($errors) > 0)
+    <div class="p-1">
+        @foreach($errors->all() as $error)
+            <div class="alert alert-warning alert-danger fade show" role="alert">{{$error}} <button type="button" class="close"
+                                                                                                    data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button></div>
+        @endforeach
+    </div>
+@endif
 
 
 @endsection
+

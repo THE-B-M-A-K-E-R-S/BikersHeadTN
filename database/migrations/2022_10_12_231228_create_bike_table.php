@@ -20,13 +20,19 @@ return new class extends Migration
             $table->string('color');
             $table->string('brand');
             $table->string('model');
-            $table->string('type');
+           
             $table->string('size');
             $table->string('price');
             $table->string('description');
             $table->timestamps();
 
-         
+
+            // Foreign key
+            $table->foreignId('bike_type_id')
+                ->constrained('bike_types')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
+           
         });
     }
 

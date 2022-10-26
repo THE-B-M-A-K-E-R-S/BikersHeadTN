@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1> Create a new Event Type</h1>
+    <h1> Create a new Bike Type</h1>
 
     <div class="container">
 
-        <form action="{{ route('eventype.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('biketype.store') }}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
-                <label for="name">Label</label>
+                <label for="name">Name</label>
                 <input type="text" name="name" id="name" class="form-control">
             </div>
 

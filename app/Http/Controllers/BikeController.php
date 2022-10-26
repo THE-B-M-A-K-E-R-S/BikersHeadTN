@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Storage;
 use App\Models\Bike;
 use App\Models\Image;
 
-use Storage;
+use App\Models\BikeType;
+use Illuminate\Http\Request;
 
 class BikeController extends Controller
 {
@@ -19,7 +20,7 @@ class BikeController extends Controller
     {
         $bikes = Bike::all();
         $images = Image::all();
-        return view('layouts.bike.index', compact('bikes' , 'images'));
+        return view('layouts.bike.index', compact('bikes', 'images'));
     }
 
     /**
@@ -29,7 +30,8 @@ class BikeController extends Controller
      */
     public function create()
     {
-        return view('layouts.bike.create');
+        $bikeTypes = BikeType::all();
+        return view('layouts.bike.create', compact('bikeTypes'));
     }
 
     /**
@@ -46,7 +48,7 @@ class BikeController extends Controller
             'color' => 'required',
             'brand' => 'required',
             'model' => 'required',
-            'type' => 'required',
+            'bike_type_id' => 'required',
             'size' => 'required',
             'price' => 'required',
             'description' => 'required',
