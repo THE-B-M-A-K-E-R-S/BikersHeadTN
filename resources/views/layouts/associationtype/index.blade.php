@@ -1,37 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <html lang="">
+<html lang="">
 
-    <h1>All Associations types</h1>
-    <div class=" container-fluid col-12">
-        <div class="col-lg-12 col-md-12 container-fluid  d-flex flex-wrap">
-            <table>
-                <thead>
+<h1>All Associations types</h1>
+<h4><a href="{{ route('associationtype.create') }}">Create Association Type</a></h4>
+
+<div class=" container-fluid col-12">
+    <div class="col-lg-12 col-md-12 container-fluid  d-flex flex-wrap">
+        <table>
+            <thead>
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 @foreach($associationTypes as $association)
-                    <tr>
-                        <td>{{ $association->id }}</td>
-                        <td>{{ $association->name }}</td>
-                        <td>
-                            <a href="{{ route('associationtype.show', $association->id) }}">Show</a>
-                            <a href="{{ route('associationtype.edit', $association->id) }}">Edit</a>
-                            <form action="{{ route('associationtype.destroy', $association->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" >Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $association->id }}</td>
+                    <td>{{ $association->name }}</td>
+                    <td>
+                        <a href="{{ route('associationtype.show', $association->id) }}">Show</a>
+                        <a href="{{ route('associationtype.edit', $association->id) }}">Edit</a>
+                        <form action="{{ route('associationtype.destroy', $association->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
                 @endforeach
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
-    </html>
+</div>
+
+</html>
 @endsection

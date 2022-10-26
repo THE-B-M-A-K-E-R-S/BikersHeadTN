@@ -30,7 +30,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <style>
-        svg{
+        svg {
             height: 10px;
         }
     </style>
@@ -202,14 +202,17 @@
                             @endguest
                         </div>
 
-{{--route to events--}}
-                                <a class="nav-link  " href=" {{ route('event.index') }} ">Events</a>
-                                <a class="nav-link " href=" {{ route('balade.index') }} " role="button">Balades</a>
-                                <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
-                                <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button" >Trotinettes</a>
-                                <a class="nav-link " href=" {{ route('association.index') }} " role="button" >Associations</a>
-                                <a class="nav-link " href=" {{ route('reclamation.index') }} " role="button" >Complaints</a>
-                                <a class="nav-link " href=" {{ route('reclamationtype.index') }} " role="button" >Complain Types</a>
+                        {{--route to events--}}
+                        <a class="nav-link  " href=" {{ route('event.index') }} ">Events</a>
+                        <a class="nav-link " href=" {{ route('balade.index') }} " role="button">Balades</a>
+                        <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
+                        <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button">Trotinettes</a>
+                        <a class="nav-link " href=" {{ route('association.index') }} " role="button">Associations</a>
+                        <a class="nav-link " href=" {{ route('associationtype.index') }} " role="button">Associations
+                            type</a>
+                        <a class="nav-link " href=" {{ route('reclamation.index') }} " role="button">Complaints</a>
+                        <a class="nav-link " href=" {{ route('reclamationtype.index') }} " role="button">Complain
+                            Types</a>
 
                     </div>
                     <!-- Right elements -->
