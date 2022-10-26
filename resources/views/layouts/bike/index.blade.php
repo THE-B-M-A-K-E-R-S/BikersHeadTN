@@ -67,22 +67,59 @@
 
 </div>
 <div class="container">
-   
+
 
     <div class="row">
-       
+
         <div class="col-md-12">
             <div class="card">
 
                 @foreach($bikes as $bike)
 
 
+
+                {{-- @foreach ($images as $image)
+                @if ($bike->id == $image->bike_id)
+
+                <img src="{{ url('/uploads/bike/'.$image->image) }}" alt="bike image" height="200" width="300"
+                    class="d-block w-100">
+                @endif
+                @endforeach --}}
+
+
                 <div class="col-md-4">
-                    @foreach ($images as $image)
-                    @if ($bike->id == $image->bike_id)
-                    <img src="{{ url('/uploads/bike/'.$image->image) }}" alt="bike image" height="200" width="300">
-                    @endif
-                    @endforeach
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+                        <div class="carousel-inner ">
+                            @foreach($images as $image)
+
+                            <div class="carousel-item @if($loop->first) active @endif">
+                                @if ($image->bike_id == $bike->id )
+
+
+                                <img src="{{ url('/uploads/bike/'.$image->image) }}"
+                                    class="d-inline-block border text-center rounded" alt="{{ $image->image }}"
+                                    width="400">
+
+                                @endif
+                            </div>
+
+
+
+                            @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
 
                     <div class="card mb-4 shadow-sm">
 

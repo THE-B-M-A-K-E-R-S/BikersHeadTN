@@ -35,8 +35,7 @@
 
     <div class="form-group">
         <strong>EventType:</strong>
-        {{ $event->eventType }}
-
+        {{ $event->eventType->name }}
     </div>
 
 </body>

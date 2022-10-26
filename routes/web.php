@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\AssociationController;
-use App\Http\Controllers\AssociationTypeController;
-use App\Http\Controllers\BaladeController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BikeController;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\BaladeTypeController;
+use App\Http\Controllers\BaladeController;
+use App\Http\Controllers\BikeTypeController;
 use App\Http\Controllers\EventTypeController;
+use App\Http\Controllers\BaladeTypeController;
+use App\Http\Controllers\CategorieTController;
 use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\ReclamationTypeController;
 use App\Http\Controllers\TrotinetteController;
-use App\Http\Controllers\CategorieTController;
 use App\Models\ReclamationType;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BikeController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\AssociationTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         return view('admin/dashboard');
     });
     Route::resource('/bike', BikeController::class);
+    Route::resource('/biketype', BikeTypeController::class);
+
     Route::resource('/event', EventController::class);
     Route::resource('/eventype', EventTypeController::class);
     Route::resource('/balade', BaladeController::class);
