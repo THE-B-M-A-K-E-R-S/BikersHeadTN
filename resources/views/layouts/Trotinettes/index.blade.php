@@ -9,6 +9,7 @@
                 </div>
                 <div class="pull-right mb-2">
                     <a class="btn btn-success" href="{{ route('trotinettes.create') }}"> Add a new Trotinette</a>
+                    
                 </div>
             </div>
         </div>
