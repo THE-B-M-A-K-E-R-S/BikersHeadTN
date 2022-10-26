@@ -7,6 +7,7 @@ use App\Models\Bike;
 use App\Models\Image;
 
 use App\Models\BikeType;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 
 class BikeController extends Controller
@@ -55,7 +56,10 @@ class BikeController extends Controller
         ]);
 
 
-
+        $this -> validate($request, [
+        'g-recaptcha-response' =>
+        ['required', new Recaptcha()]]);
+        
         $bike = Bike::create($request->all());
 
         if ($request->hasFile('image')) {
