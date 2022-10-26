@@ -208,9 +208,11 @@
                         <a class="nav-link " href=" {{ route('bike.index') }} " role="button">Bikes</a>
                         <a class="nav-link " href=" {{ route('trotinettes.index') }} " role="button">Trotinettes</a>
                         <a class="nav-link " href=" {{ route('association.index') }} " role="button">Associations</a>
+
                         <a class="nav-link " href=" {{ route('associationtype.index') }} " role="button">Associations type</a>
-{{--                        <a class="nav-link " href=" {{ route('reclamation.index') }} " role="button">Complaints</a>--}}
-{{--                        <a class="nav-link " href=" {{ route('reclamationtype.index') }} " role="button">Complain--}}
+                        <a class="nav-link " href=" {{ route('reclamation.index') }} " role="button">Complaints</a>
+                        <a class="nav-link " href=" {{ route('reclamationtype.index') }} " role="button">Complain
+
                             Types</a>
 
                     </div>

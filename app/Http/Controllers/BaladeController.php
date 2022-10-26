@@ -47,13 +47,13 @@ class BaladeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|string|min:3|max:100',
+            'description' => 'required|string|min:3|max:100',
             'date' => 'required',
-            'duration' => 'required',
-            'distance' => 'required',
+            'duration' => 'required|numeric',
+            'distance' => 'required|numeric',
             'place' => 'required',
-            'max_participants' => 'required',
+            'max_participants' => 'required|numeric',
             'balade_type_id' => 'required',
 
         ]);
