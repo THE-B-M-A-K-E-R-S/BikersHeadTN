@@ -16,7 +16,9 @@ class ReclamationController extends Controller
 {
     public function index(): View|Factory|Application
     {
-        $reclamations = Reclamation::all();
+        $reclamations = Reclamation::query()
+            ->where('description', 'LIKE', "%%")
+            ->paginate(2);
         return view('layouts.reclamation.index', compact('reclamations'));
     }
 
