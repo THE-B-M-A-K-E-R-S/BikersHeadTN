@@ -65,33 +65,33 @@ class ReclamationTypeController extends Controller
             ->with('success', 'Reclamation deleted successfully');
     }
 
-    public function search(Request $request): Factory|View|Application
+    public function reclamationtype_search(Request $request): Factory|View|Application
     {
         // Get the search value from the request
         $search = $request->input('search');
 
         // Search in the title and body columns from the posts table
-        $reclamationTypes = ReclamationType::query()
-            ->where('title', 'LIKE', "%{$search}%")
+        $reclamationtypes = ReclamationType::query()
+            ->where('label', 'LIKE', "%{$search}%")
             ->get();
 
-        return view('layouts.reclamationtype.index', compact('reclamationTypes'));
+        return view('layouts.reclamationtype.index', compact('reclamationtypes'));
     }
 
-    public function tri(Request $request): Factory|View|Application
+    public function tri_reclamationtype(Request $request): Factory|View|Application
     {
         // Get the search value from the request
         $tri = $request->input('tri');
 
         if ($tri == 'ALL') {
-            $reclamationTypes = ReclamationType::all();
+            $reclamationtypes = ReclamationType::all();
         }
         else {
-            $reclamationTypes = ReclamationType::orderBy('label', 'ASC')->get();
+            $reclamationtypes = ReclamationType::orderBy('label', 'ASC')->get();
         }
 
 
 
-        return view('layouts.reclamationtype.index', compact('reclamationTypes'));
+        return view('layouts.reclamationtype.index', compact('reclamationtypes'));
     }
 }

@@ -18,7 +18,8 @@ class ReclamationController extends Controller
     {
         $reclamations = Reclamation::query()
             ->where('description', 'LIKE', "%%")
-            ->paginate(2);
+            ->paginate(99);
+
         return view('layouts.reclamation.index', compact('reclamations'));
     }
 
@@ -82,7 +83,7 @@ class ReclamationController extends Controller
         // Search in the title and body columns from the posts table
         $reclamations = Reclamation::query()
             ->where('description', 'LIKE', "%{$search}%")
-            ->get();
+            ->paginate(3);
 
         return view('layouts.reclamation.index', compact('reclamations'));
     }
@@ -93,12 +94,14 @@ class ReclamationController extends Controller
         $tri = $request->input('tri');
 
         if ($tri == 'ALL') {
-            $reclamations = Reclamation::all();
+            $reclamations = Reclamation::query()
+                ->where('description', 'LIKE', "%%")
+                ->paginate(3);
         }
         else if ($tri == 'DESCRIPTION') {
-            $reclamations = Reclamation::orderBy('description', 'ASC')->get();
+            $reclamations = Reclamation::orderBy('description', 'ASC')->paginate(3);;
         }
-        else $reclamations = Reclamation::orderBy('date', 'ASC')->get();
+        else $reclamations = Reclamation::orderBy('date', 'ASC')->paginate(3);;
 
 
 
