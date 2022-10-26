@@ -19,7 +19,7 @@ class EventController extends Controller
         // get all events
         $events = Event::query()
 //            ->where('title', 'LIKE', "%%")
-            ->paginate(2);
+            ->paginate(1);
         // return view with events
         return view('layouts.event.index', compact('events'));
     }

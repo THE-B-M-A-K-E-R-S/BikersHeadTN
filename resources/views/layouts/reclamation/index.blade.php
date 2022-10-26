@@ -76,7 +76,9 @@
     </div>
 
 
-
+    <div class="row-cols-12 max-width-50px">
+        {!! $reclamations->appends(\Request::except('page'))->render() !!}
+    </div>
 @endsection
 
 

@@ -11,7 +11,7 @@
                     <div class="section-tittle mb-35">
                         <h2>Complaints</h2>
                         <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                            <form method="GET" action="{{ route('search_reclamationtype') }}">
+                            <form method="GET" action="{{ route('reclamationtype_search') }}">
                                 {{csrf_field()}}
                                 <ul class="list-group list-group-horizontal">
                                     <li class="list-group-item">
@@ -28,7 +28,7 @@
 
                         {{--Tri--}}
                         <div class="list-group-horizontal" style="width: 400px; margin: auto">
-                            <form method="GET" action="{{ route('tri_reclamationtype') }}">
+                            <form method="GET" action="{{ route('reclamationtype_tri') }}">
                                 {{csrf_field()}}
                                 <ul class="list-group list-group-horizontal">
                                     <li class="list-group-item text-center">Trier Par</li>
